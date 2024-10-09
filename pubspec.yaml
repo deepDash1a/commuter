@@ -1,0 +1,59 @@
+name: commuter
+description: "A new Flutter project."
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.3 <4.0.0"
+
+dependencies:
+  cupertino_icons: ^1.0.6
+  dio: ^5.6.0
+  equatable: ^2.0.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.6
+  flutter_localizations:
+    sdk: flutter
+  flutter_native_splash: ^2.4.1
+  flutter_screenutil: ^5.9.3
+  geolocator: ^13.0.1
+  google_maps_flutter: ^2.9.0
+  geocoding: ^3.0.0
+  image_picker: ^1.1.2
+  intl: ^0.19.0
+  path: ^1.9.0
+  pretty_dio_logger: ^1.4.0
+  shared_preferences: ^2.3.2
+  material_floating_search_bar_2: ^0.5.0
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Almarai-Bold
+      fonts:
+        - asset: lib/core/theme/fonts/Almarai-Bold.ttf
+
+    - family: Almarai-ExtraBold
+      fonts:
+        - asset: lib/core/theme/fonts/Almarai-ExtraBold.ttf
+
+    - family: Almarai-Light
+      fonts:
+        - asset: lib/core/theme/fonts/Almarai-Light.ttf
+
+    - family: Almarai-Regular
+      fonts:
+        - asset: lib/core/theme/fonts/Almarai-Regular.ttf
