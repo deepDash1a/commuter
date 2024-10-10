@@ -28,6 +28,10 @@ class LoginForm extends StatelessWidget {
             text: 'تم تسجيل الدخول بنجاح',
             color: ColorsManager.green,
           );
+
+          context.read<AuthenticationAppCubit>().loginEmailController.clear();
+          context.read<AuthenticationAppCubit>().loginPasswordController.clear();
+          context.read<AuthenticationAppCubit>().loginIsRemembered = false;
           if (SharedPrefService.getData(key: SharedPrefKeys.captainStatus) ==
               'تم الموافقة') {
             context.pushReplacementNamed(Routes.captainDashBoardScreen);

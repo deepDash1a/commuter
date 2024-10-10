@@ -18,8 +18,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
+// ignore: must_be_immutable
 class EndShift extends StatelessWidget {
-  const EndShift({super.key});
+  EndShift({super.key});
+
+  var endShiftFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,7 @@ class EndShift extends StatelessWidget {
             return SharedPrefService.getData(key: SharedPrefKeys.shiftId) !=
                     null
                 ? Form(
-                    key: cubit.endShiftFormKey,
+                    key: endShiftFormKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -170,7 +173,7 @@ class EndShift extends StatelessWidget {
                                 child: CustomButton(
                                   text: 'نهاية الوردية',
                                   onPressed: () {
-                                    if (cubit.endShiftFormKey.currentState!
+                                    if (endShiftFormKey.currentState!
                                         .validate()) {
                                       if (cubit.endShiftCarMeterImage == null) {
                                         customSnackBar(

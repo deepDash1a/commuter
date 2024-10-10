@@ -54,7 +54,7 @@ class AddExpenses extends StatelessWidget {
                     children: [
                       Expanded(
                         child: CustomTextButton(
-                          text: 'الوقود',
+                          text: 'التشغيل',
                           function: () {
                             cubit.changeAddExpenses(0);
                           },
@@ -89,11 +89,9 @@ class AddExpenses extends StatelessWidget {
                   SizedBox(
                     height: 15.00.h,
                   ),
-                  if (cubit.addExpensesNavAppBar == 0) const ExpensesGaz(),
-                  if (cubit.addExpensesNavAppBar == 1)
-                    const ExpensesAppCharging(),
-                  if (cubit.addExpensesNavAppBar == 2)
-                    const AdditionalExpenses(),
+                  if (cubit.addExpensesNavAppBar == 0) ExpensesGaz(),
+                  if (cubit.addExpensesNavAppBar == 1) ExpensesAppCharging(),
+                  if (cubit.addExpensesNavAppBar == 2) AdditionalExpenses(),
                 ],
               ),
             ),
@@ -104,10 +102,13 @@ class AddExpenses extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ExpensesGaz extends StatelessWidget {
-  const ExpensesGaz({
+  ExpensesGaz({
     super.key,
   });
+
+  var expensesGazFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -139,15 +140,10 @@ class ExpensesGaz extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<CaptainAppCubit>();
         return Form(
-          key: cubit.expensesGazFormKey,
+          key: expensesGazFormKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
-                child: BoldText20dark(
-                  text: 'الوقود',
-                ),
-              ),
               SizedBox(
                 height: 25.00.h,
               ),
@@ -273,8 +269,7 @@ class ExpensesGaz extends StatelessWidget {
                       child: CustomButton(
                         text: 'إرسال',
                         onPressed: () {
-                          if (cubit.expensesGazFormKey.currentState!
-                              .validate()) {
+                          if (expensesGazFormKey.currentState!.validate()) {
                             cubit.addExpensesFuel();
                           }
                         },
@@ -288,10 +283,13 @@ class ExpensesGaz extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ExpensesAppCharging extends StatelessWidget {
-  const ExpensesAppCharging({
+  ExpensesAppCharging({
     super.key,
   });
+
+  var expensesAppChargeFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -322,15 +320,10 @@ class ExpensesAppCharging extends StatelessWidget {
         var cubit = context.read<CaptainAppCubit>();
 
         return Form(
-          key: cubit.expensesAppChargeFormKey,
+          key: expensesAppChargeFormKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
-                child: BoldText20dark(
-                  text: 'شحن تطبيقات',
-                ),
-              ),
               SizedBox(
                 height: 25.00.h,
               ),
@@ -454,7 +447,7 @@ class ExpensesAppCharging extends StatelessWidget {
                       child: CustomButton(
                         text: 'إرسال',
                         onPressed: () {
-                          if (cubit.expensesAppChargeFormKey.currentState!
+                          if (expensesAppChargeFormKey.currentState!
                               .validate()) {
                             if (cubit.expensesAppChargeImage == null) {
                               customSnackBar(
@@ -477,10 +470,13 @@ class ExpensesAppCharging extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class AdditionalExpenses extends StatelessWidget {
-  const AdditionalExpenses({
+  AdditionalExpenses({
     super.key,
   });
+
+  var anotherExpensesFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -509,15 +505,10 @@ class AdditionalExpenses extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<CaptainAppCubit>();
         return Form(
-          key: cubit.anotherExpensesFormKey,
+          key: anotherExpensesFormKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
-                child: BoldText20dark(
-                  text: 'مصروفات إضافية',
-                ),
-              ),
               SizedBox(
                 height: 25.00.h,
               ),
@@ -644,8 +635,7 @@ class AdditionalExpenses extends StatelessWidget {
                       child: CustomButton(
                         text: 'إرسال',
                         onPressed: () {
-                          if (cubit.anotherExpensesFormKey.currentState!
-                              .validate()) {
+                          if (anotherExpensesFormKey.currentState!.validate()) {
                             if (cubit.expensesAnotherImage == null) {
                               customSnackBar(
                                 context: context,

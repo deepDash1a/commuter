@@ -20,13 +20,107 @@ class RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationAppCubit, AuthenticationAppStates>(
-      listener: (context, state) {
+      listener: (context, state)  {
         if (state is SuccessRegisterAuthenticationAppState) {
           customSnackBar(
             context: context,
             text: 'تم إنشاء حساب جديد بنجاح',
             color: ColorsManager.green,
           );
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationFirstNameController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationLastNameController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationWhatsAppController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationAnotherPhoneNumberController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationEmailController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationPasswordController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationConfirmPasswordController
+              .clear();
+
+          context.read<AuthenticationAppCubit>().registrationIdCardFaceImage =
+              null;
+          context.read<AuthenticationAppCubit>().registrationIdCardBackImage =
+              null;
+
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationDrivingLicenseFaceImage = null;
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationDrivingLicenseBackImage = null;
+
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationGovernorateController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationCityController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationRegionController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationBuildingController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationFloorController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationFlatController
+              .clear();
+
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationBirthCertificateImage = null;
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationCriminalCheckCertificateImage = null;
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationGraduationCertificateImage = null;
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationArmyCertificateImage = null;
+
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationWalletNumberController
+              .clear();
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationBankAccountController
+              .clear();
+          context.read<AuthenticationAppCubit>().registrationPersonalImage =
+              null;
+          context
+              .read<AuthenticationAppCubit>()
+              .registrationLicenseExpiryController
+              .clear();
+
           context.pop();
         }
         if (state is ErrorRegisterAuthenticationAppState) {
@@ -623,8 +717,7 @@ class RegisterForm extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset:
-                          const Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                   borderRadius: BorderRadius.circular(10.00.r),
@@ -656,8 +749,7 @@ class RegisterForm extends StatelessWidget {
                                         .then((value) {
                                       cubit.registrationBirthCertificateImage =
                                           cubit.pickImageFromDevice(
-                                        cubit
-                                            .registrationBirthCertificateImage,
+                                        cubit.registrationBirthCertificateImage,
                                         value!,
                                       );
                                     });
@@ -681,8 +773,7 @@ class RegisterForm extends StatelessWidget {
                                         .then((value) {
                                       cubit.registrationBirthCertificateImage =
                                           cubit.pickImageFromDevice(
-                                        cubit
-                                            .registrationBirthCertificateImage,
+                                        cubit.registrationBirthCertificateImage,
                                         value!,
                                       );
                                     });
@@ -713,8 +804,7 @@ class RegisterForm extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset:
-                          const Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                   borderRadius: BorderRadius.circular(10.00.r),
@@ -725,10 +815,10 @@ class RegisterForm extends StatelessWidget {
                     vertical: 15.00.h,
                   ),
                   child: CustomTextButton(
-                    text: cubit.registrationCriminalCheckCertificateImage ==
-                            null
-                        ? 'قم بإدراج صورة الفيش الجنائي'
-                        : '✅ تم إدراج صورة الفيش الجنائي بنجاح',
+                    text:
+                        cubit.registrationCriminalCheckCertificateImage == null
+                            ? 'قم بإدراج صورة الفيش الجنائي'
+                            : '✅ تم إدراج صورة الفيش الجنائي بنجاح',
                     function: () {
                       showDialog(
                         context: context,
@@ -804,8 +894,7 @@ class RegisterForm extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset:
-                          const Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                   borderRadius: BorderRadius.circular(10.00.r),
@@ -894,8 +983,7 @@ class RegisterForm extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset:
-                          const Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                   borderRadius: BorderRadius.circular(10.00.r),
@@ -927,8 +1015,7 @@ class RegisterForm extends StatelessWidget {
                                         .then((value) {
                                       cubit.registrationArmyCertificateImage =
                                           cubit.pickImageFromDevice(
-                                        cubit
-                                            .registrationArmyCertificateImage,
+                                        cubit.registrationArmyCertificateImage,
                                         value!,
                                       );
                                     });
@@ -952,8 +1039,7 @@ class RegisterForm extends StatelessWidget {
                                         .then((value) {
                                       cubit.registrationArmyCertificateImage =
                                           cubit.pickImageFromDevice(
-                                        cubit
-                                            .registrationArmyCertificateImage,
+                                        cubit.registrationArmyCertificateImage,
                                         value!,
                                       );
                                     });

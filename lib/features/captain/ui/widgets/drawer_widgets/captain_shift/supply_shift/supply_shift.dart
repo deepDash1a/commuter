@@ -18,8 +18,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
+// ignore: must_be_immutable
 class SupplyShift extends StatelessWidget {
-  const SupplyShift({super.key});
+  SupplyShift({super.key});
+
+  var supplyFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,7 @@ class SupplyShift extends StatelessWidget {
           children: [
             SharedPrefService.getData(key: SharedPrefKeys.shiftId) != null
                 ? Form(
-                    key: cubit.supplyFormKey,
+                    key: supplyFormKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -201,7 +204,7 @@ class SupplyShift extends StatelessWidget {
                                 child: CustomButton(
                                   text: 'إرسال',
                                   onPressed: () {
-                                    if (cubit.supplyFormKey.currentState!
+                                    if (supplyFormKey.currentState!
                                         .validate()) {
                                       if (cubit.supplyMethodSelectedValue ==
                                           'كاش') {

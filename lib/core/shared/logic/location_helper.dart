@@ -53,15 +53,26 @@ class LocationUtils {
 
   static Future<Position> getCurrentPosition() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+    // Check if location services are disabled and open location settings.
     if (!serviceEnabled) {
       await Geolocator.openLocationSettings();
-      return Future.error('Location services are disabled.');
+
+      // After opening settings, wait for the user to enable location services.
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+      // If location services are still disabled, return an error.
+      if (!serviceEnabled) {
+        return Future.error('Location services are still disabled.');
+      }
     }
 
+    // Check and request location permissions.
     if (!await requestPermissions()) {
       return Future.error('Location permissions are denied.');
     }
 
+    // Finally, get the current position if everything is enabled.
     return await Geolocator.getCurrentPosition(
       locationSettings: const LocationSettings(
         accuracy: LocationAccuracy.high,

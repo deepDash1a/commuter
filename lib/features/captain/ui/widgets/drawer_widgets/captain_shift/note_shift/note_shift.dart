@@ -13,10 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// ignore: must_be_immutable
 class NotesShiftTile extends StatelessWidget {
-  const NotesShiftTile({
+  NotesShiftTile({
     super.key,
   });
+
+  var noteShiftFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class NotesShiftTile extends StatelessWidget {
           children: [
             SharedPrefService.getData(key: SharedPrefKeys.shiftId) != null
                 ? Form(
-                    key: cubit.noteShiftFormKey,
+                    key: noteShiftFormKey,
                     child: Column(
                       children: [
                         const BoldText18dark(text: 'اكتب ملاحظاتك:'),
@@ -94,7 +97,7 @@ class NotesShiftTile extends StatelessWidget {
                             : CustomButton(
                                 text: 'إرسال',
                                 onPressed: () {
-                                  if (cubit.noteShiftFormKey.currentState!
+                                  if (noteShiftFormKey.currentState!
                                       .validate()) {
                                     cubit.sendNote();
                                   }

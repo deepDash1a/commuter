@@ -86,7 +86,7 @@ class AboutUs extends StatelessWidget {
                 SizedBox(height: 10.00.h),
                 ExpansionTile(
                   title: const BoldText18dark(
-                    text: 'ما هي التعليمات/التنبيهات للشهر ؟',
+                    text: 'ما هي التعليمات/التنبيهات للشيفت الشهري ؟',
                   ),
                   backgroundColor: ColorsManager.offWhite,
                   children: [

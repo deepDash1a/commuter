@@ -83,7 +83,7 @@ class DrawerItems extends StatelessWidget {
         function: () {
           context.pop();
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PersonalDetails()));
+              MaterialPageRoute(builder: (context) => PersonalDetails()));
         },
         icon: ImagesManager.person,
         text: 'الصفحة الشخصية',

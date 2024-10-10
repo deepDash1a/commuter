@@ -90,9 +90,8 @@ class AddRevenue extends StatelessWidget {
                     height: 15.00.h,
                   ),
                   if (cubit.addRevenueNavAppBar == 0)
-                    const AddApplicationTripRevenue(),
-                  if (cubit.addRevenueNavAppBar == 1)
-                    const AddOutSideTripRevenue(),
+                    AddApplicationTripRevenue(),
+                  if (cubit.addRevenueNavAppBar == 1) AddOutSideTripRevenue(),
                   // if (cubit.addRevenueNavAppBar == 2) const AddShiftsRevenue(),
                 ],
               ),
@@ -104,10 +103,13 @@ class AddRevenue extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class AddApplicationTripRevenue extends StatelessWidget {
-  const AddApplicationTripRevenue({
+  AddApplicationTripRevenue({
     super.key,
   });
+
+  var revenueAppFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -142,15 +144,10 @@ class AddApplicationTripRevenue extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<CaptainAppCubit>();
         return Form(
-          key: cubit.revenueAppFormKey,
+          key: revenueAppFormKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
-                child: BoldText20dark(
-                  text: 'إضافة تطبيقات',
-                ),
-              ),
               SizedBox(
                 height: 25.00.h,
               ),
@@ -290,8 +287,7 @@ class AddApplicationTripRevenue extends StatelessWidget {
                       child: CustomButton(
                         text: 'إرسال',
                         onPressed: () {
-                          if (cubit.revenueAppFormKey.currentState!
-                              .validate()) {
+                          if (revenueAppFormKey.currentState!.validate()) {
                             if (cubit.revenueAppTripPaymentValueImage == null) {
                               customSnackBar(
                                 context: context,
@@ -314,10 +310,13 @@ class AddApplicationTripRevenue extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class AddOutSideTripRevenue extends StatelessWidget {
-  const AddOutSideTripRevenue({
+  AddOutSideTripRevenue({
     super.key,
   });
+
+  var revenueOutsideFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -352,14 +351,9 @@ class AddOutSideTripRevenue extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<CaptainAppCubit>();
         return Form(
-          key: cubit.revenueOutsideFormKey,
+          key: revenueOutsideFormKey,
           child: Column(
             children: [
-              const Center(
-                child: BoldText20dark(
-                  text: 'إضافة رحلات خارجية',
-                ),
-              ),
               SizedBox(
                 height: 25.00.h,
               ),
@@ -398,8 +392,7 @@ class AddOutSideTripRevenue extends StatelessWidget {
                   : CustomButton(
                       text: 'إرسال',
                       onPressed: () {
-                        if (cubit.revenueOutsideFormKey.currentState!
-                            .validate()) {
+                        if (revenueOutsideFormKey.currentState!.validate()) {
                           cubit.addRevenueTrip();
                         }
                       },

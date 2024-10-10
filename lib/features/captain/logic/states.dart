@@ -1,7 +1,7 @@
 import 'package:commuter/features/captain/data/captain_shift/control_shift_time_model.dart';
 import 'package:commuter/features/captain/data/captain_shift/end_shift_model.dart';
 import 'package:commuter/features/captain/data/captain_shift/new_shift_model.dart';
-import 'package:commuter/features/captain/data/captain_shift/perosnal_model.dart';
+import 'package:commuter/features/captain/data/captain_shift/personal_model.dart';
 import 'package:commuter/features/captain/data/captain_shift/place_details_model.dart';
 
 abstract class CaptainAppStates {}

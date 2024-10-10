@@ -1,5 +1,7 @@
 import 'package:commuter/core/routing/routes.dart';
 import 'package:commuter/core/shared/extensions/nav_extension.dart';
+import 'package:commuter/core/shared/logic/shared_pref.dart';
+import 'package:commuter/core/shared/logic/shared_pref_keys.dart';
 import 'package:commuter/core/shared/widgets/custom_text_button.dart';
 import 'package:commuter/core/shared/widgets/texts.dart';
 import 'package:commuter/core/theme/colors/colors.dart';
@@ -55,6 +57,7 @@ class _WaitingScreenState extends State<WaitingScreen> {
               CustomTextButton(
                 text: 'تسجيل الخروج',
                 function: () {
+                  SharedPrefService.removeData(key: SharedPrefKeys.token);
                   context.pushNamedAndRemoveUntil(
                     Routes.loginScreen,
                     predicate: (Route<dynamic> route) => false,

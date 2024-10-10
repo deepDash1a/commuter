@@ -15,7 +15,7 @@ import 'package:commuter/features/captain/data/captain_shift/control_shift_time_
 import 'package:commuter/features/captain/data/captain_shift/daily_report.dart';
 import 'package:commuter/features/captain/data/captain_shift/end_shift_model.dart';
 import 'package:commuter/features/captain/data/captain_shift/new_shift_model.dart';
-import 'package:commuter/features/captain/data/captain_shift/perosnal_model.dart';
+import 'package:commuter/features/captain/data/captain_shift/personal_model.dart';
 import 'package:commuter/features/captain/data/captain_shift/place_details_model.dart';
 import 'package:commuter/features/captain/data/captain_shift/places_suggestion.dart';
 import 'package:commuter/features/captain/data/captain_shift/report_filter.dart';
@@ -130,7 +130,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
 
   /// TODO: SHIFT SECTION
   // New Shift Logic Section ==> new shift
-  var newShiftFormKey = GlobalKey<FormState>();
   bool getAllCarsLoading = false;
   GetAllCarTypesModel? getAllCarTypesModel;
   int? selectedCarTypeValue;
@@ -199,7 +198,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
           key: SharedPrefKeys.shiftId, value: newShiftModel!.shiftId);
       emit(SuccessStartNewShiftCaptainAppState(newShiftModel: newShiftModel!));
     } on ServerException catch (error) {
-      print(error);
       emit(
         ErrorStartNewShiftCaptainAppState(
           error: error.errorModel.errorMessage,
@@ -370,7 +368,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   }
 
   //add out side trip revenue
-  var revenueOutsideFormKey = GlobalKey<FormState>();
   var revenueOutsideTripNumController = TextEditingController();
   var revenueOutsidePaymentValueController = TextEditingController();
 
@@ -407,7 +404,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   }
 
   // Add applications revenue
-  var revenueAppFormKey = GlobalKey<FormState>();
   List<DropdownMenuItem<String>> revenueAppNameList = [
     const DropdownMenuItem(
       value: 'أوبر',
@@ -486,7 +482,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   /// TODO: SHIFT => EXPENSES SECTION
   // additional expenses
   int addExpensesNavAppBar = 0;
-  var anotherExpensesFormKey = GlobalKey<FormState>();
   var expensesItemTypeController = TextEditingController();
   var expensesPaidCostController = TextEditingController();
   XFile? expensesAnotherImage;
@@ -529,7 +524,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   }
 
   // applications charging expenses
-  var expensesAppChargeFormKey = GlobalKey<FormState>();
   List<DropdownMenuItem<String>> expensesAppChargeNameList = [
     const DropdownMenuItem(
       value: 'أوبر',
@@ -597,7 +591,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   }
 
   // Gaz expenses
-  var expensesGazFormKey = GlobalKey<FormState>();
   List<DropdownMenuItem<String>> expensesGazList = [
     const DropdownMenuItem(
       value: 'البنزين',
@@ -665,7 +658,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   }
 
   /// TODO: SHIFT => SUPPLIES SECTION
-  var supplyFormKey = GlobalKey<FormState>();
   var supplierNameController = TextEditingController();
   var suppliedAmountCostController = TextEditingController();
   List<DropdownMenuItem<String>> supplyMethodList = [
@@ -743,7 +735,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   }
 
   /// TODO: SHIFT => NOTES SECTION
-  var noteShiftFormKey = GlobalKey<FormState>();
   var writeNoteController = TextEditingController();
 
   sendNote() async {
@@ -774,7 +765,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   }
 
   /// TODO: SHIFT => END SHIFT SECTION
-  var endShiftFormKey = GlobalKey<FormState>();
   var endShiftCarMeterController = TextEditingController();
   XFile? endShiftCarMeterImage;
   EndShiftModel? endShiftModel;
@@ -817,15 +807,12 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   Future<List<dynamic>> getSuggestions(String place) async {
     try {
       Response response = await apiConsumer.get(
-        // 'https://maps.googleapis.com/maps/api/place/autocomplete/json',
         'https://maps.googleapis.com/maps/api/place/textsearch/json',
-        // 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
         queryParameters: {
           'query': place,
           'type': 'address',
           'components': 'country:eg',
           'key': 'AIzaSyBtpz1PYwlJoXX_OC4Mpi9-h4mDzyPZGvM',
-          // 'sessiontoken': sessionToken,
         },
       );
       return response.data['results']
@@ -894,7 +881,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
 
   /// TODO:  Reports Logic Section
   bool isDailyReport = true;
-  var monthlyReportFromKey = GlobalKey<FormState>();
   var startMonthlyDateController = TextEditingController();
   var endMonthlyDateController = TextEditingController();
 
@@ -1020,7 +1006,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
     }
   }
 
-
   getSummaryRevenue() async {
     emit(LoadingGetSummaryRevenueAppState());
 
@@ -1104,7 +1089,6 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
   }
 
   /// TODO: Personal Details Logic Section
-  var personalFormKey = GlobalKey<FormState>();
   XFile? personalImage;
   PersonalModel? personalModel;
   var personalFirstNameController = TextEditingController();

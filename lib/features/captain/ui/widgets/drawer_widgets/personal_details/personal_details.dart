@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:commuter/core/routing/routes.dart';
 import 'package:commuter/core/shared/extensions/nav_extension.dart';
 import 'package:commuter/core/shared/functions/shared_functions.dart';
 import 'package:commuter/core/shared/widgets/custom_text_button.dart';
@@ -16,8 +17,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
+//ignore: must_be_immutable
 class PersonalDetails extends StatelessWidget {
-  const PersonalDetails({super.key});
+  PersonalDetails({super.key});
+
+  var personalFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +76,7 @@ class PersonalDetails extends StatelessWidget {
                   vertical: 16.00.h,
                 ),
                 child: Form(
-                  key: cubit.personalFormKey,
+                  key: personalFormKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -290,7 +294,7 @@ class PersonalDetails extends StatelessWidget {
                             child: CustomTextButton(
                                 text: 'تعديل',
                                 function: () {
-                                  if (cubit.personalFormKey.currentState!
+                                  if (personalFormKey.currentState!
                                       .validate()) {
                                     showDialog(
                                       context: context,
@@ -331,7 +335,10 @@ class PersonalDetails extends StatelessWidget {
                                       CustomTextButton(
                                         text: 'موافق',
                                         function: () {
-                                          cubit.logout(context);
+                                          context.pushNamedAndRemoveUntil(
+                                            Routes.loginScreen,
+                                            predicate: (Route<dynamic> route) => false,
+                                          );
                                         },
                                       ),
                                       CustomTextButton(

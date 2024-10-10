@@ -72,9 +72,7 @@ class CaptainReports extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 20.00.h),
-                    cubit.isDailyReport
-                        ? const DailyReport()
-                        : const MonthlyReport(),
+                    cubit.isDailyReport ? const DailyReport() : MonthlyReport(),
                     SizedBox(height: 20.00.h),
                   ],
                 ),
@@ -249,7 +247,9 @@ class DailyReport extends StatelessWidget {
 
 //ignore: must_be_immutable
 class MonthlyReport extends StatelessWidget {
-  const MonthlyReport({super.key});
+  MonthlyReport({super.key});
+
+  var monthlyReportFromKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -258,7 +258,7 @@ class MonthlyReport extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<CaptainAppCubit>();
         return Form(
-          key: cubit.monthlyReportFromKey,
+          key: monthlyReportFromKey,
           child: Column(
             children: [
               const ExtraBoldText18dark(text: 'التقرير الشهري'),
@@ -346,8 +346,7 @@ class MonthlyReport extends StatelessWidget {
                   : CustomButton(
                       text: 'عرض',
                       onPressed: () {
-                        if (cubit.monthlyReportFromKey.currentState!
-                            .validate()) {
+                        if (monthlyReportFromKey.currentState!.validate()) {
                           cubit.filterReport();
                         }
                       },

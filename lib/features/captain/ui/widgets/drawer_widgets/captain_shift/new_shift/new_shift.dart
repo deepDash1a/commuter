@@ -21,10 +21,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
+// ignore: must_be_immutable
 class NewShift extends StatelessWidget {
-  const NewShift({
+  NewShift({
     super.key,
   });
+
+  var newShiftFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +83,7 @@ class NewShift extends StatelessWidget {
                     ],
                   )
                 : Form(
-                    key: cubit.newShiftFormKey,
+                    key: newShiftFormKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -215,7 +218,7 @@ class NewShift extends StatelessWidget {
                                 child: CustomButton(
                                   text: 'بدء الوردية',
                                   onPressed: () {
-                                    if (cubit.newShiftFormKey.currentState!
+                                    if (newShiftFormKey.currentState!
                                         .validate()) {
                                       if (cubit.newShiftImage == null) {
                                         customSnackBar(
