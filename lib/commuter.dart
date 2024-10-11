@@ -44,7 +44,8 @@ class Commuter extends StatelessWidget {
             )
               ..getAllMessages()
               ..getAllDailyReport()
-              ..getPersonalProfile(),
+              ..getPersonalProfile()
+              ..getAllSuppliers(),
           ),
         ],
         child: MaterialApp(

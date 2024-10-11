@@ -34,6 +34,7 @@ class SupplyShift extends StatelessWidget {
             text: 'تم إضافة المورد بنجاح!',
             color: ColorsManager.green,
           );
+          context.read<CaptainAppCubit>().getAllSuppliersModel;
           context.read<CaptainAppCubit>().supplierNameController.clear();
           context.read<CaptainAppCubit>().suppliedAmountCostController.clear();
           context.read<CaptainAppCubit>().supplyMethodSelectedValue = null;

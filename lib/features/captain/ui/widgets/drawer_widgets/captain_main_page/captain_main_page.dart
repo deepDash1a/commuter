@@ -1,6 +1,9 @@
+import 'package:commuter/core/shared/widgets/texts.dart';
 import 'package:commuter/core/theme/colors/colors.dart';
 import 'package:commuter/core/theme/fonts/font_names.dart';
 import 'package:commuter/core/theme/images/images.dart';
+import 'package:commuter/features/captain/data/captain_shift/suppliers_model.dart';
+import 'package:commuter/features/captain/data/dash_board_model/dash_board_messages_model.dart';
 import 'package:commuter/features/captain/logic/cubit.dart';
 import 'package:commuter/features/captain/logic/states.dart';
 import 'package:commuter/features/captain/ui/widgets/drawer_widgets/captain_main_page/instructions_details.dart';
@@ -46,174 +49,136 @@ class CaptainMainPage extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<CaptainAppCubit>();
         return SafeArea(
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity.w,
-                height: 70.00.h,
-                decoration: BoxDecoration(
-                  color: ColorsManager.mainAppColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(16.00.r),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                titleContainer(
+                    text: 'الرسائل',
+                    image: ImagesManager.captainMainPageMessages),
+                SizedBox(
+                  height: 20.00.h,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.00.w),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        width: 40.00.w,
-                        height: 40.00.h,
-                        ImagesManager.captainMainPageMessages,
-                      ),
-                      SizedBox(
-                        width: 15.00.w,
-                      ),
-                      Text(
-                        'الرسائل',
-                        style: TextStyle(
-                          fontSize: 18.00.sp,
-                          fontFamily: FontNamesManager.extraBold,
-                          color: ColorsManager.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20.00.h,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: ColorsManager.offWhite,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(16.00.r),
-                ),
-                child: cubit.getMessage
+                cubit.dashBoardMessageModel == null
                     ? const Center(
                         child: CircularProgressIndicator.adaptive(),
                       )
-                    : Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20.00.w,
-                          vertical: 20.00.h,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                cubit.dashBoardMessageModel!.messages!.isEmpty
-                                    ? 'لا توجد رسائل حاليًا لعرضها'
-                                    : '${cubit.dashBoardMessageModel!.messages![0].content}',
-                                maxLines: 100,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  height: 2.2,
-                                  fontSize: 14.00.sp,
-                                  fontFamily: FontNamesManager.bold,
-                                  color: cubit.dashBoardMessageModel!.messages!
-                                          .isEmpty
-                                      ? ColorsManager.red
-                                      : ColorsManager.mainAppColor,
-                                ),
-                              ),
-                            ),
-                          ],
+                    : SizedBox(
+                        height: 100.00.h,
+                        child: ListView.separated(
+                          itemBuilder: (context, index) => MessageItems(
+                              messages: cubit
+                                  .dashBoardMessageModel!.messages![index]),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(height: 20.00.h),
+                          itemCount:
+                              cubit.dashBoardMessageModel!.messages!.length,
                         ),
                       ),
-              ),
-              SizedBox(
-                height: 30.00.h,
-              ),
-              Container(
-                width: double.infinity.w,
-                height: 1.00.h,
-                color: ColorsManager.mainAppColor.withOpacity(0.3),
-              ),
-              SizedBox(
-                height: 30.00.h,
-              ),
-              Container(
-                width: double.infinity.w,
-                height: 70.00.h,
-                decoration: BoxDecoration(
-                  color: ColorsManager.mainAppColor,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(16.00.r),
+                SizedBox(
+                  height: 30.00.h,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.00.w),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        width: 40.00.w,
-                        height: 40.00.h,
-                        ImagesManager.captainMainPageInstructions,
-                      ),
-                      SizedBox(
-                        width: 15.00.w,
-                      ),
-                      Text(
-                        'التعليمات',
-                        style: TextStyle(
-                          fontSize: 18.00.sp,
-                          fontFamily: FontNamesManager.extraBold,
-                          color: ColorsManager.white,
-                        ),
-                      ),
-                    ],
-                  ),
+                titleContainer(
+                    text: 'التعليمات',
+                    image: ImagesManager.captainMainPageInstructions),
+                SizedBox(
+                  height: 5.00.h,
                 ),
-              ),
-              SizedBox(
-                height: 20.00.h,
-              ),
-              SizedBox(
-                height: 260.00.h,
-                child: GridView.count(
-                  primary: false,
-                  padding: const EdgeInsets.all(20),
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 25,
-                  crossAxisCount: 3,
-                  childAspectRatio: 1,
-                  children: List.generate(
-                    instructionItems.length,
-                    (index) => Center(
-                      // Center each item inside the grid
-                      child: instructionItems[index],
+                SizedBox(
+                  height: 260.00.h,
+                  child: GridView.count(
+                    primary: false,
+                    padding: const EdgeInsets.all(20),
+                    crossAxisSpacing: 15,
+                    mainAxisSpacing: 25,
+                    crossAxisCount: 3,
+                    childAspectRatio: 1,
+                    children: List.generate(
+                      instructionItems.length,
+                      (index) => Center(
+                        // Center each item inside the grid
+                        child: instructionItems[index],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                titleContainer(
+                    text: 'ملاحظاتك',
+                    image: ImagesManager.captainMainPageNotes),
+                SizedBox(
+                  height: 20.00.h,
+                ),
+                titleContainer(
+                    text: 'توريداتك',
+                    image: ImagesManager.captainMainPageSupply),
+                SizedBox(
+                  height: 20.00.h,
+                ),
+                cubit.getAllSuppliersModel == null
+                    ? const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      )
+                    : SizedBox(
+                        height: 200.00.h,
+                        child: ListView.separated(
+                          itemBuilder: (context, index) => SupplyItems(
+                              suppliersModel:
+                                  cubit.getAllSuppliersModel!.body![index]),
+                          separatorBuilder: (context, index) => SizedBox(height: 10.00.h,),
+                          itemCount: cubit.getAllSuppliersModel!.body!.length,
+                        ),
+                      ),
+              ],
+            ),
           ),
         );
       },
     );
   }
 }
+
+Widget titleContainer({
+  required String text,
+  required String image,
+}) =>
+    Container(
+      width: double.infinity.w,
+      height: 70.00.h,
+      decoration: BoxDecoration(
+        color: ColorsManager.mainAppColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(16.00.r),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.00.w),
+        child: Row(
+          children: [
+            Image.asset(
+              width: 40.00.w,
+              height: 40.00.h,
+              image,
+            ),
+            SizedBox(
+              width: 15.00.w,
+            ),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 18.00.sp,
+                fontFamily: FontNamesManager.extraBold,
+                color: ColorsManager.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
 
 class InstructionItems extends StatelessWidget {
   const InstructionItems({
@@ -273,6 +238,85 @@ class InstructionItems extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SupplyItems extends StatelessWidget {
+  const SupplyItems({
+    super.key,
+    required this.suppliersModel,
+  });
+
+  final SuppliersModel suppliersModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10.00.w, vertical: 10.00.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.00.w, vertical: 10.00.h),
+      decoration: BoxDecoration(
+        color: ColorsManager.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 4,
+            offset: const Offset(0, 2), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(16.00.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BoldText18dark(text: 'الاسم: ${suppliersModel.supplierName}'),
+          SizedBox(height: 10.00.h),
+          BoldText18dark(text: 'القيمة: ${suppliersModel.price}'),
+          SizedBox(height: 10.00.h),
+          BoldText18dark(text: 'طريقة الدفع: ${suppliersModel.wayPay}'),
+          SizedBox(height: 10.00.h),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: BoldText18dark(
+              text: '${suppliersModel.createdAt}'.substring(0, 10),
+              color: ColorsManager.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MessageItems extends StatelessWidget {
+  const MessageItems({
+    super.key,
+    required this.messages,
+  });
+
+  final Messages messages;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: 10.00.w,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 10.00.w, vertical: 10.00.h),
+      decoration: BoxDecoration(
+        color: ColorsManager.offWhite,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+        borderRadius: BorderRadius.circular(16.00.r),
+      ),
+      child: BoldText14dark(text: '${messages.content}'),
     );
   }
 }

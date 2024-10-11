@@ -6,6 +6,11 @@ class ImagesManager {
       'assets/images/captain_main_page_messages.png';
   static const String captainMainPageInstructions =
       'assets/images/captain_main_page_instructions.png';
+
+  static const String captainMainPageNotes =
+      'assets/images/captain_main_page_notes.png';
+  static const String captainMainPageSupply =
+      'assets/images/captain_main_page_supply.png';
   static const String captainMap = 'assets/images/captain_map.png';
   static const String captainNewShift = 'assets/images/captain_new_shift.png';
   static const String captainQuestions = 'assets/images/captain_questions.png';

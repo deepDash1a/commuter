@@ -22,6 +22,7 @@ import 'package:commuter/features/captain/data/captain_shift/report_filter.dart'
 import 'package:commuter/features/captain/data/captain_shift/revenue_course_model.dart';
 import 'package:commuter/features/captain/data/captain_shift/summary_expense.dart';
 import 'package:commuter/features/captain/data/captain_shift/summary_revenue.dart';
+import 'package:commuter/features/captain/data/captain_shift/suppliers_model.dart';
 import 'package:commuter/features/captain/data/dash_board_model/dash_board_messages_model.dart';
 import 'package:commuter/features/captain/logic/states.dart';
 import 'package:dio/dio.dart';
@@ -726,6 +727,30 @@ class CaptainAppCubit extends Cubit<CaptainAppStates> {
       emit(ErrorAddSuppliersCaptainAppState(
         error: error.errorModel.errorMessage,
       ));
+    }
+  }
+
+  GetAllSuppliersModel? getAllSuppliersModel;
+
+  getAllSuppliers() async {
+    emit(LoadingGetAllSuppliersCaptainAppState());
+
+    try {
+      final response = await apiConsumer.get(
+        EndPoints.getAllSuppliers,
+        options: Options(
+          headers: {
+            'Authorization':
+                'Bearer ${SharedPrefService.getData(key: SharedPrefKeys.token)}',
+          },
+        ),
+      );
+
+      getAllSuppliersModel = GetAllSuppliersModel.fromJson(response.data);
+      emit(SuccessGetAllSuppliersCaptainAppState());
+    } on ServerException catch (error) {
+      emit(ErrorGetAllSuppliersCaptainAppState(
+          error: error.errorModel.errorMessage));
     }
   }
 

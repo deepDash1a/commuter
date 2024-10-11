@@ -42,12 +42,15 @@ class CaptainDashboardScreen extends StatelessWidget {
               ),
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    const CaptainAppBar(),
-                    SizedBox(height: 40.00.h),
-                    const CaptainMainPage(),
-                  ],
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8.00.w),
+                  child: Column(
+                    children: [
+                      const CaptainAppBar(),
+                      SizedBox(height: 40.00.h),
+                      const CaptainMainPage(),
+                    ],
+                  ),
                 ),
               ),
             ),
